@@ -3,6 +3,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Swal from "sweetalert2";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -26,7 +27,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  photoUrl: z.string().url({
+  photoURL: z.string().url({
     message: "Please enter a valid URL for the profile photo.",
   }),
   password: z
@@ -45,14 +46,14 @@ const formSchema = z.object({
 const Register = () => {
   const { user, registerUser } = useContext(AuthContext) as any as AuthInfo;
 
-  console.log(user);
+ 
   // Define form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
-      photoUrl: "",
+      photoURL: "",
       password: "",
     },
   });
@@ -63,10 +64,45 @@ const Register = () => {
     if(registerUser){
         registerUser(email, password)
           .then((result) => {
-            console.log(result);
+            console.log(result.user);
+            fetch("http://localhost:8080/api/v1/user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: values.name,
+                email: result.user.email,
+                photoURL: values.photoURL,
+                password: values.password,
+              }),
+            }).then(()=>{
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "User created successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+  
+            }).catch(err =>{
+                Swal.fire({
+                  position: "center",
+                  icon: "error",
+                  title: err.message,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+            })
           })
           .catch((err) => {
-            console.log(err.message);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: err.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
     }
   }
@@ -111,7 +147,7 @@ const Register = () => {
               />
               <FormField
                 control={form.control}
-                name='photoUrl'
+                name='photoURL'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Photo URL</FormLabel>
