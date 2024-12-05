@@ -2,9 +2,12 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import AllRoutes from './routes/routes';
+import AuthProviders from './providers/AuthProviders';
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
+  <AuthProviders>
     <AllRoutes/>
+  </AuthProviders>
   // </StrictMode>
 );
