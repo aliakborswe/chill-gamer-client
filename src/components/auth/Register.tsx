@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "@/providers/AuthProviders";
+import { AuthInfo } from "@/utils/type";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -26,21 +29,23 @@ const formSchema = z.object({
   photoUrl: z.string().url({
     message: "Please enter a valid URL for the profile photo.",
   }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters." })
-  .refine(
-    (value) => /[A-Z]/.test(value), // Must have at least one uppercase letter
-    { message: "Password must contain at least one uppercase letter." }
-  )
-  .refine(
-    (value) => /[a-z]/.test(value), // Must have at least one lowercase letter
-    { message: "Password must contain at least one lowercase letter." }
-  )
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters." })
+    .refine(
+      (value) => /[A-Z]/.test(value), // Must have at least one uppercase letter
+      { message: "Password must contain at least one uppercase letter." }
+    )
+    .refine(
+      (value) => /[a-z]/.test(value), // Must have at least one lowercase letter
+      { message: "Password must contain at least one lowercase letter." }
+    ),
 });
 
-
-
-
 const Register = () => {
+  const { user, registerUser } = useContext(AuthContext) as any as AuthInfo;
+
+  console.log(user);
   // Define form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,10 +58,18 @@ const Register = () => {
   });
   // Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    console.log(values);
+    const email = values.email as string;
+    const password = values.password as string;
+    if(registerUser){
+        registerUser(email, password)
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+    }
   }
-    
 
   return (
     <div>
