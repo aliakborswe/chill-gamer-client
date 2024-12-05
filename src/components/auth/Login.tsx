@@ -14,11 +14,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "@/providers/AuthProviders";
+import { AuthInfo } from "@/utils/type";
 import SocialLogin from "./SocialLogin";
+import { toast } from "react-toastify";
 
 const formSchema = z.object({
-  
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -36,6 +39,12 @@ const formSchema = z.object({
 });
 
 const Login = () => {
+  const { loginWithEmailPass } = useContext(AuthContext) as any as AuthInfo;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   // Define form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,10 +55,24 @@ const Login = () => {
   });
   // Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    console.log(values);
+    loginWithEmailPass(values.email, values.password)
+      .then(() => {
+        fetch("http://localhost:8080/api/v1/user", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({email: values.email}),
+        }).then(()=>{
+            toast.success("login Success!");
+        })
+        navigate(from, { replace: true });
+        form.reset();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }
-
 
   return (
     <div>
@@ -61,9 +84,12 @@ const Login = () => {
           className='md:w-1/2 aspect-square'
         />
         <div className='md:w-1/2'>
-        <SocialLogin/>
+          <SocialLogin />
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 border-t-2 border-accent pt-6'>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='space-y-8 border-t-2 border-accent pt-6'
+            >
               <FormField
                 control={form.control}
                 name='email'

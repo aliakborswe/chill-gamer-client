@@ -9,4 +9,5 @@ export type AuthInfo = {
   logOut: () =>Promise<void>;
   updateUserProfile: (updateInfo : object) => Promise<void>;
   loginWithGoogle: () => Promise<UserCredential>;
+  loginWithEmailPass: (email: string, password: string) => Promise<UserCredential>
 };

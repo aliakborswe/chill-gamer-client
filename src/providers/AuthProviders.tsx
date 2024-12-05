@@ -4,6 +4,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
@@ -20,6 +21,7 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext<AuthInfo | null>(null);
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 const AuthProviders = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
@@ -29,9 +31,8 @@ const AuthProviders = ({ children }: AuthProviderProps) => {
   // observer auth state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      }
+      
+    setUser(user as User);
       setLoading(false);
     });
     return () => unsubscribe();
@@ -40,7 +41,16 @@ const AuthProviders = ({ children }: AuthProviderProps) => {
   // login with google popup
   const loginWithGoogle = () => {
     setLoading(true);
-    return signInWithPopup(auth, new GoogleAuthProvider());
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  // login with email and password
+  const loginWithEmailPass = (
+    email: string,
+    password: string
+  ): Promise<UserCredential> => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const registerUser = (
@@ -64,6 +74,7 @@ const AuthProviders = ({ children }: AuthProviderProps) => {
     user,
     setUser,
     loginWithGoogle,
+    loginWithEmailPass,
     registerUser,
     updateUserProfile,
     loading,

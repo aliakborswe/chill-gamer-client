@@ -66,7 +66,6 @@ const Register = () => {
     if(registerUser){
         registerUser(email, password)
           .then((result) => {
-            console.log(result.user);
             fetch("http://localhost:8080/api/v1/user", {
               method: "POST",
               headers: {
@@ -87,6 +86,7 @@ const Register = () => {
                   timer: 1000,
                 });
                 updateUserProfile(updatedUser);
+                form.reset();
                 navigate("/")
             }).catch(err =>{
                 Swal.fire({
