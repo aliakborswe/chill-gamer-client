@@ -1,10 +1,10 @@
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { Button } from './components/ui/button';
+import AllRoutes from './routes/routes';
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Button>Click me</Button>
-  </StrictMode>
+  // <StrictMode>
+    <AllRoutes/>
+  // </StrictMode>
 );
