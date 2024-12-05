@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
@@ -44,8 +44,8 @@ const formSchema = z.object({
 });
 
 const Register = () => {
-  const { user, registerUser } = useContext(AuthContext) as any as AuthInfo;
-
+  const {registerUser } = useContext(AuthContext) as any as AuthInfo;
+  const navigate = useNavigate()
  
   // Define form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -82,9 +82,9 @@ const Register = () => {
                   icon: "success",
                   title: "User created successfully",
                   showConfirmButton: false,
-                  timer: 1500,
+                  timer: 1000,
                 });
-  
+                navigate("/")
             }).catch(err =>{
                 Swal.fire({
                   position: "center",
