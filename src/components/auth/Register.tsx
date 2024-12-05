@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -55,8 +56,7 @@ const Register = () => {
     // Do something with the form values.
     console.log(values);
   }
-      
-    //   src ="https://lottie.host/ee6124ae-6e2d-4e49-990e-c53070a21056/lXIvBH3Gdn.lottie";
+    
 
   return (
     <div>
@@ -128,6 +128,15 @@ const Register = () => {
               </Button>
             </form>
           </Form>
+          <p className='mt-8 text-start text-muted-foreground'>
+            Have an account?{" "}
+            <Link
+              to='/login'
+              className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
+            >
+              Please Login
+            </Link>
+          </p>
         </div>
       </Wrapper>
     </div>

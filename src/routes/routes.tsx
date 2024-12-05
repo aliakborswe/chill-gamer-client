@@ -1,3 +1,4 @@
+import Login from "@/components/auth/Login";
 import Register from "@/components/auth/Register";
 import Home from "@/components/home/Home";
 import MainLayout from "@/MainLayout";
@@ -12,6 +13,7 @@ const AllRoutes = () => {
             <Route index element={<Home/>} />
             <Route path="/about" element={<h1>this is about </h1>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
