@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
+import SocialLogin from "./SocialLogin";
 
 const formSchema = z.object({
   
@@ -60,8 +61,9 @@ const Login = () => {
           className='md:w-1/2 aspect-square'
         />
         <div className='md:w-1/2'>
+        <SocialLogin/>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 border-t-2 border-accent pt-6'>
               <FormField
                 control={form.control}
                 name='email'

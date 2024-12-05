@@ -6,5 +6,7 @@ export type AuthInfo = {
   registerUser?: (email: string, password: string) => Promise<UserCredential>;
   loading?: boolean;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-  logOut: () => Promise<void>;
+  logOut: () =>Promise<void>;
+  updateUserProfile: (updateInfo : object) => Promise<void>;
+  loginWithGoogle: () => Promise<UserCredential>;
 };

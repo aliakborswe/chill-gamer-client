@@ -2,8 +2,11 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithPopup,
   signOut,
+  updateProfile,
   User,
   UserCredential,
 } from "firebase/auth";
@@ -21,16 +24,24 @@ const AuthProviders = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
 
+  console.log(user);
+
   // observer auth state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if(user){
-            setUser(user);
-        }
-        setLoading(false);
+      if (user) {
+        setUser(user);
+      }
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
+
+  // login with google popup
+  const loginWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, new GoogleAuthProvider());
+  };
 
   const registerUser = (
     email: string,
@@ -39,13 +50,22 @@ const AuthProviders = ({ children }: AuthProviderProps) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  const logOut = ()=>{
-   return signOut(auth)
-  }
+  //update user information
+  const updateUserProfile = (updateInfo: object) => {
+    return updateProfile(auth.currentUser as User, updateInfo);
+  };
+
+  // LogOut user
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
   const authInfo: AuthInfo = {
     user,
     setUser,
+    loginWithGoogle,
     registerUser,
+    updateUserProfile,
     loading,
     setLoading,
     logOut,

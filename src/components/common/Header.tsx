@@ -2,26 +2,27 @@ import { AuthContext } from '@/providers/AuthProviders';
 import { AuthInfo } from '@/utils/type';
 import  { useContext } from 'react';
 import { Button } from '../ui/button';
-import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext) as any as AuthInfo;
+    const navigate = useNavigate()
+    // console.log(user)
 
-    const handleLogOut = () => {
-        logOut().then(() => {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "successfully logged out",
-              showConfirmButton: false,
-              timer: 1000,
-            });
-        })
-    }
+    const handleLogout = async () => {
+      try {
+        await logOut();
+        navigate("/login");
+        toast.success("Logout Success!");
+      } catch(err:any){
+        toast.error(err.message || "Logout Failed");
+      }
+    };
     return (
       <div>
         this is header {user?.email}
-        <Button onClick={handleLogOut}>Logout</Button>
+        <Button onClick={handleLogout}>Logout</Button>
       </div>
     );
 };

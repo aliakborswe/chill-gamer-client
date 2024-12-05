@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
+import SocialLogin from "./SocialLogin";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -44,7 +45,7 @@ const formSchema = z.object({
 });
 
 const Register = () => {
-  const {registerUser } = useContext(AuthContext) as any as AuthInfo;
+  const {registerUser, updateUserProfile } = useContext(AuthContext) as any as AuthInfo;
   const navigate = useNavigate()
  
   // Define form.
@@ -61,6 +62,7 @@ const Register = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const email = values.email as string;
     const password = values.password as string;
+    const updatedUser = { displayName: values.name, photoURL: values.photoURL };
     if(registerUser){
         registerUser(email, password)
           .then((result) => {
@@ -84,6 +86,7 @@ const Register = () => {
                   showConfirmButton: false,
                   timer: 1000,
                 });
+                updateUserProfile(updatedUser);
                 navigate("/")
             }).catch(err =>{
                 Swal.fire({
@@ -117,8 +120,12 @@ const Register = () => {
           className='md:w-1/2 aspect-square'
         />
         <div className='md:w-1/2'>
+        <SocialLogin/>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='space-y-8 border-t-2 border-accent pt-6'
+            >
               <FormField
                 control={form.control}
                 name='name'
