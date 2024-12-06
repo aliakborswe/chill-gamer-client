@@ -24,9 +24,6 @@ const AllReviews=()=>{
     const fetchReviews = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/v1/reviews");
-        if (!response.ok) {
-          throw new Error("Failed to fetch reviews");
-        }
         const data = await response.json();
         setReviews(data);
       } catch (err:any) {

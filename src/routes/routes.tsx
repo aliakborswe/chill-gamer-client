@@ -11,6 +11,7 @@ import AllReviews from "@/components/allReviews/AllReviews";
 import AddReviews from "@/components/addReviews/AddReviews";
 import MyReviews from "@/components/myReviews/MyReviews";
 import GameWatchList from "@/components/gameWatchList/GameWatchList";
+import ReviewDetails from "@/components/allReviews/ReviewDetails";
 
 
 const AllRoutes = () => {
@@ -24,6 +25,7 @@ const AllRoutes = () => {
             <Route index element={<Home />} />
             <Route path='about' element={<h1>this is about </h1>} />
             <Route path='reviews' element={<AllReviews />} />
+            <Route path='reviews/:id' element={<ReviewDetails />} />
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             Private Routes
