@@ -26,7 +26,6 @@ const AuthProviders = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
 
-  console.log(user);
 
   // observer auth state change
   useEffect(() => {

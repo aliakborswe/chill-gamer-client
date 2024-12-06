@@ -24,7 +24,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/login");
+      navigate("/");
       toast.success("Logout Success!");
     } catch (err: any) {
       toast.error(err.message || "Logout Failed");
@@ -37,7 +37,7 @@ const Header = () => {
           <div className='flex items-center'>
             {/* mobile menu icon */}
             <div onClick={toggleMenu} className='lg:hidden'>
-              {showMenu == true ? <X size={36}/> : <Menu size={36}/>}
+              {showMenu == true ? <X size={36} /> : <Menu size={36} />}
             </div>
             <div className='flex items-center justify-start'>
               <img src={logo} alt='logo' className='w-10' />
@@ -51,12 +51,12 @@ const Header = () => {
               showMenu ? "block bg-white" : "hidden"
             } lg:block absolute z-10 lg:static top-20 left-0 p-4 rounded-xl pr-16 lg:pr-0`}
           >
-            <div className='flex flex-col lg:flex-row  gap-4 md:items-center text-base font-semibold text-black w-full'>
+            <div className='flex flex-col lg:flex-row  gap-4 md:items-center text-base font-medium text-black w-full'>
               <ActiveLink to='/'>Home</ActiveLink>
-              <ActiveLink to='/all-reviews'>All-Reviews</ActiveLink>
-              <ActiveLink to='/add-reviews'>Add-Review</ActiveLink>
-              <ActiveLink to='/my-reviews'>My-Reviews</ActiveLink>
-              <ActiveLink to='/game-watch-list'>Game-WatchList</ActiveLink>
+              <ActiveLink to='/reviews'>All-Reviews</ActiveLink>
+              <ActiveLink to='/addReview'>Add-Review</ActiveLink>
+              <ActiveLink to='/myReviews'>My-Reviews</ActiveLink>
+              <ActiveLink to='/myWatchlist'>Game-WatchList</ActiveLink>
               <ActiveLink to='/about'>About</ActiveLink>
             </div>
           </div>
@@ -74,9 +74,7 @@ const Header = () => {
                     data-tooltip-id='my-tooltip-inline'
                     data-tooltip-content={user?.displayName}
                   />
-                  <Tooltip
-                    id='my-tooltip-inline'
-                  />
+                  <Tooltip id='my-tooltip-inline' />
                 </div>
                 <Button
                   onClick={handleLogout}

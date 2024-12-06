@@ -1,8 +1,8 @@
-import React from 'react';
+
 
 const GameWatchList = () => {
     return (
-        <div>
+        <div className="text-7xl">
             Game Watch List
         </div>
     );

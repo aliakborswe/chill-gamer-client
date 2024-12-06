@@ -3,9 +3,8 @@ import { AuthInfo } from "@/utils/type";
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import googleIcon from "@/assets/google.svg"
+import googleIcon from "@/assets/google.svg";
 import { Button } from "../ui/button";
-
 
 const SocialLogin = () => {
   const { loginWithGoogle } = useContext(AuthContext) as any as AuthInfo;
@@ -16,12 +15,11 @@ const SocialLogin = () => {
 
   const handlePopup = () => {
     loginWithGoogle()
-      .then((result) => {
-        console.log(result.user.email)
+      .then(() => {
+        toast.success("Success to login");
         navigate(from, { replace: true });
-        toast.success("Success");
       })
-      .catch((err:any) => {
+      .catch((err) => {
         toast.error(err.message);
       });
   };

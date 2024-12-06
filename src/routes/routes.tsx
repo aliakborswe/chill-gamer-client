@@ -23,17 +23,14 @@ const AllRoutes = () => {
             {/* public routes */}
             <Route index element={<Home />} />
             <Route path='about' element={<h1>this is about </h1>} />
-            <Route path='all-reviews' element={<AllReviews/>} />
+            <Route path='reviews' element={<AllReviews />} />
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             Private Routes
             <Route element={<PrivetRoute isAuthenticated={isAuthenticated} />}>
-              <Route
-                path='add-reviews'
-                element={<AddReviews/>}
-              />
-              <Route path='my-reviews' element={<MyReviews/>} />
-              <Route path='game-watch-list' element={<GameWatchList/>} />
+              <Route path='addReview' element={<AddReviews />} />
+              <Route path='myReviews' element={<MyReviews />} />
+              <Route path='myWatchlist' element={<GameWatchList />} />
             </Route>
           </Route>
         </Routes>

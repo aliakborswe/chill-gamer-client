@@ -62,16 +62,24 @@ const Login = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({email: values.email}),
-        }).then(()=>{
-            toast.success("login Success!");
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
         })
+          .then(() => {
+            toast.success("login Success!");
+          })
+          .catch((err) => {
+            toast.error(err.message);
+          });
         navigate(from, { replace: true });
         form.reset();
       })
-      .catch((error) => {
-        toast.error(error.message);
+      .catch(() => {
+        toast.error("Email or Password not Matched");
       });
+      
   }
 
   return (
@@ -110,7 +118,11 @@ const Login = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter password' {...field} />
+                      <Input
+                        placeholder='Enter password'
+                        type='password'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

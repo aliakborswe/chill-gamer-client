@@ -172,7 +172,7 @@ const Register = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter password' {...field} />
+                      <Input placeholder='Enter password' type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

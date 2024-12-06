@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")!).render(
   // <StrictMode>
   <AuthProviders>
     <AllRoutes />
-    <ToastContainer />
+    <ToastContainer position='bottom-right' />
   </AuthProviders>
   // </StrictMode>
 );
