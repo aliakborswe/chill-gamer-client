@@ -20,7 +20,6 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   const navigate = useNavigate();
-  // console.log(user)
 
   const handleLogout = async () => {
     try {
@@ -37,8 +36,8 @@ const Header = () => {
         <nav className='flex flex-row gap-6 justify-between items-center'>
           <div className='flex items-center'>
             {/* mobile menu icon */}
-            <div onClick={toggleMenu} className='text-xl lg:hidden'>
-              {showMenu == true ? <X /> : <Menu />}
+            <div onClick={toggleMenu} className='lg:hidden'>
+              {showMenu == true ? <X size={36}/> : <Menu size={36}/>}
             </div>
             <div className='flex items-center justify-start'>
               <img src={logo} alt='logo' className='w-10' />
@@ -58,12 +57,13 @@ const Header = () => {
               <ActiveLink to='/add-reviews'>Add-Review</ActiveLink>
               <ActiveLink to='/my-reviews'>My-Reviews</ActiveLink>
               <ActiveLink to='/game-watch-list'>Game-WatchList</ActiveLink>
+              <ActiveLink to='/about'>About</ActiveLink>
             </div>
           </div>
           <div className='flex items-center gap-2 text-base font-semibold [&_a]:flex [&_a]:gap-1 '>
             {user !== null ? (
               <>
-                <div className='md:flex flex-col items-end hidden '>
+                <div>
                   <img
                     src={
                       user?.photoURL ||
