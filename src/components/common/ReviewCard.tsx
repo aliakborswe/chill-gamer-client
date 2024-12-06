@@ -41,8 +41,8 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
             Rating:
             <div>
               <div className='flex gap-1 items-center'>
+                <span>{review.rating}/10</span>
                 <Star className='text-yellow-400' size={16} />
-                <span>{review.rating}</span>
               </div>
             </div>
           </div>

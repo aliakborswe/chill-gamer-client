@@ -9,7 +9,7 @@ import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
 import AllReviews from "@/components/allReviews/AllReviews";
 import AddReviews from "@/components/addReviews/AddReviews";
-import MyReviews from "@/components/myReviews/MyReviews";
+// import MyReviews from "@/components/myReviews/MyReviews";
 import GameWatchList from "@/components/gameWatchList/GameWatchList";
 import ReviewDetails from "@/components/allReviews/ReviewDetails";
 
@@ -31,7 +31,7 @@ const AllRoutes = () => {
             Private Routes
             <Route element={<PrivetRoute isAuthenticated={isAuthenticated} />}>
               <Route path='addReview' element={<AddReviews />} />
-              <Route path='myReviews' element={<MyReviews />} />
+              {/* <Route path='myReviews' element={<MyReviews />} /> */}
               <Route path='myWatchlist' element={<GameWatchList />} />
             </Route>
           </Route>
