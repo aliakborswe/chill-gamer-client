@@ -43,16 +43,24 @@ const ReviewDetails =()=> {
     }
   }, [id]);
 
-  const handleWatchList = () =>{
-    fetch("http://localhost:8080/api/v1/watchLists",{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({...review}),
-    })
-    .then(()=> toast.success("Watch List add successfully"))
-    .catch(err => {toast.error(err.message)});
+  const handleWatchList = async() =>{
+    try{
+      const response = await fetch("http://localhost:8080/api/v1/watchLists",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({...review}),
+      });
+      if (!response.ok) {
+        toast.error("This game already exist watch list");
+        return;
+      }
+      toast.success("Watch List add successfully")
+    }catch(err:any){
+      toast.error(err.message)
+
+    }
   }
 
 
