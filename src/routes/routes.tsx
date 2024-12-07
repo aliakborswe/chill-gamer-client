@@ -13,6 +13,7 @@ import MyReviews from "@/components/myReviews/MyReviews";
 import GameWatchList from "@/components/gameWatchList/GameWatchList";
 import ReviewDetails from "@/components/allReviews/ReviewDetails";
 import UpdateReview from "@/components/updateReview/UpdateReview";
+import ErrorPage from "@/error-page";
 
 
 const AllRoutes = () => {
@@ -37,6 +38,8 @@ const AllRoutes = () => {
               <Route path='myWatchlist' element={<GameWatchList />} />
             </Route>
           </Route>
+          // error route without header and footer
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     );
