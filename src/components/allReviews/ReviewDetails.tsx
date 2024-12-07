@@ -8,20 +8,9 @@ import { Star } from "lucide-react";
 import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
 import { config } from "@/config";
+import { Review } from "@/utils/reviewInterface";
 
-interface Review {
-  _id: string;
-  gameCoverUrl: string;
-  gameTitle: string;
-  reviewDescription: string;
-  rating: number;
-  publishingYear: number;
-  genre: string;
-  userEmail: string;
-  userName: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
 
 const ReviewDetails = () => {
   const { user } = useContext(AuthContext) as any as AuthInfo;

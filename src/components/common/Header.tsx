@@ -60,10 +60,11 @@ const Header = () => {
               <ActiveLink to='/about'>About</ActiveLink>
             </div>
           </div>
+
           <div className='flex items-center gap-2 text-base font-semibold [&_a]:flex [&_a]:gap-1 '>
             {user !== null ? (
               <>
-                <div>
+                <div className="z-10">
                   <img
                     src={
                       user?.photoURL ||
@@ -71,10 +72,11 @@ const Header = () => {
                     }
                     className='w-10 aspect-square rounded-full'
                     alt='photo'
-                    data-tooltip-id='my-tooltip-inline'
+                    data-tooltip-id='my-tooltip'
                     data-tooltip-content={user?.displayName}
+                    data-tooltip-place='top'
                   />
-                  <Tooltip id='my-tooltip-inline' />
+                  <Tooltip id='my-tooltip' />
                 </div>
                 <Button
                   onClick={handleLogout}

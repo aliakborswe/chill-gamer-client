@@ -22,7 +22,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
           <img
             src={review.gameCoverUrl}
             alt={review.gameTitle}
-            className='rounded-md'
+            className='rounded-md aspect-video'
           />
         </div>
         <h3 className='text-lg font-semibold mb-2'>{review.gameTitle}</h3>

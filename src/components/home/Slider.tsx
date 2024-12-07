@@ -6,14 +6,14 @@ import {
   A11y,
   Autoplay,
 } from "swiper/modules";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
-import "swiper/css";
+import 'swiper/css';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+
+
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import slide1 from '@/assets/slider1.jpg'
 import slide2 from '@/assets/slider2.jpg'
