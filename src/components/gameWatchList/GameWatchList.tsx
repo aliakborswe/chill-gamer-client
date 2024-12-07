@@ -49,7 +49,8 @@ const GameWatchList = () => {
       const response = await fetch(
         `http://localhost:8080/api/v1/watchLists?id=${id}`,
         { method: "DELETE" }
-      );
+    );
+    
 
       if (!response.ok) {
         const errorResponse = await response.json();

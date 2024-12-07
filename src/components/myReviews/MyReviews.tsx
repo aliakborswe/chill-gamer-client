@@ -12,6 +12,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
+import { toast } from "react-toastify";
 
 interface Review {
   _id: string;
@@ -39,6 +40,22 @@ const MyReviews = () => {
     }
     getReviewsByEmail();
   },[email])
+
+  const handleDelete = async (id:string)=>{
+    try{
+      const response = await fetch(`http://localhost:8080/api/v1/reviews?id=${id}`,{
+        method: "DELETE"
+      });
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || "Failed to delete the item");
+      }
+      toast.success("Review deleted successfully");
+      setReviews(reviews.filter(review=>review._id!==id))
+    }catch(err:any){
+      toast.error(err.message)
+    }
+  }
   return (
     <Wrapper>
       <Table>
@@ -71,7 +88,7 @@ const MyReviews = () => {
                 <span className='cursor-pointer text-primary pr-2'>
                   <Pencil />
                 </span>
-                <span className='cursor-pointer text-red-500 pl-2'>
+                <span onClick={()=>handleDelete(_id)} className='cursor-pointer text-red-500 pl-2'>
                   <Trash2 />
                 </span>
               </TableCell>
