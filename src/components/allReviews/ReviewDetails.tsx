@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { Button } from "../ui/button";
 import Wrapper from "../common/Wrapper";
 import Spinner from "../common/Spinner";
 import { Star } from "lucide-react";
+import { AuthContext } from "@/providers/AuthProviders";
+import { AuthInfo } from "@/utils/type";
 
 interface Review {
   _id: string;
@@ -21,7 +23,7 @@ interface Review {
 }
 
 const ReviewDetails =()=> {
-
+ const {user} = useContext(AuthContext) as any as AuthInfo
   const { id } = useParams();
   const [review, setReview] = useState<Review | null>(null);
 
@@ -50,7 +52,7 @@ const ReviewDetails =()=> {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({...review}),
+          body: JSON.stringify({...review, userEmail: user?.email}),
       });
       if (!response.ok) {
         toast.error("This game already exist watch list");

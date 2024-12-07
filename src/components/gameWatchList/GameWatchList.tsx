@@ -80,7 +80,7 @@ const GameWatchList = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {watchList.map(({ _id, gameCoverUrl, gameTitle, genre }, index) => (
+          {watchList.map(({ gameId:{_id, gameCoverUrl, gameTitle, genre } = {}}, index) => (
             <TableRow key={_id}>
               <TableCell className='font-medium'>{index + 1}</TableCell>
               <TableCell>

@@ -13,6 +13,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+
 
 interface Review {
   _id: string;
@@ -26,21 +28,27 @@ interface Review {
 const MyReviews = () => {
   const { user } = useContext(AuthContext) as any as AuthInfo;
   const [reviews, setReviews] = useState<Review[]>([]);
-  console.log(reviews)
+  const navigate = useNavigate()
 
   const email = user?.email;
 
   useEffect(() =>{
     const getReviewsByEmail = async ()=>{
       const response = await fetch(
-        `http://localhost:8080/api/v1/reviews?email=${email}`
+        `http://localhost:8080/api/v1/reviewByEmail?email=${email}`
       );
       const data = await response.json()
       setReviews(data);
     }
     getReviewsByEmail();
   },[email])
+  
+  // handle edit
+  const handleEdit = (id:string) => {
+    navigate(`/updateReview/${id}`);
+  }
 
+// handle delete 
   const handleDelete = async (id:string)=>{
     try{
       const response = await fetch(`http://localhost:8080/api/v1/reviews?id=${id}`,{
@@ -85,10 +93,17 @@ const MyReviews = () => {
               </TableCell>
               <TableCell>{genre}</TableCell>
               <TableCell className='text-right flex justify-end divide-x-2 divide-emerald-400'>
-                <span className='cursor-pointer text-primary pr-2'>
+                <span
+                  onClick={() => handleEdit(_id)}
+                  className='cursor-pointer text-primary pr-2'
+                >
                   <Pencil />
                 </span>
-                <span onClick={()=>handleDelete(_id)} className='cursor-pointer text-red-500 pl-2'>
+
+                <span
+                  onClick={() => handleDelete(_id)}
+                  className='cursor-pointer text-red-500 pl-2'
+                >
                   <Trash2 />
                 </span>
               </TableCell>

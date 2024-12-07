@@ -12,6 +12,7 @@ import AddReviews from "@/components/addReviews/AddReviews";
 import MyReviews from "@/components/myReviews/MyReviews";
 import GameWatchList from "@/components/gameWatchList/GameWatchList";
 import ReviewDetails from "@/components/allReviews/ReviewDetails";
+import UpdateReview from "@/components/updateReview/UpdateReview";
 
 
 const AllRoutes = () => {
@@ -31,6 +32,7 @@ const AllRoutes = () => {
             Private Routes
             <Route element={<PrivetRoute isAuthenticated={isAuthenticated} />}>
               <Route path='addReview' element={<AddReviews />} />
+              <Route path='updateReview/:id' element={<UpdateReview />} />
               <Route path='myReviews' element={<MyReviews />} />
               <Route path='myWatchlist' element={<GameWatchList />} />
             </Route>
