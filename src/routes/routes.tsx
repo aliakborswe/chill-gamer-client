@@ -14,6 +14,7 @@ import GameWatchList from "@/components/gameWatchList/GameWatchList";
 import ReviewDetails from "@/components/allReviews/ReviewDetails";
 import UpdateReview from "@/components/updateReview/UpdateReview";
 import ErrorPage from "@/error-page";
+import About from "@/components/about/About";
 
 
 const AllRoutes = () => {
@@ -25,7 +26,7 @@ const AllRoutes = () => {
           <Route path='/' element={<MainLayout />}>
             {/* public routes */}
             <Route index element={<Home />} />
-            <Route path='about' element={<h1>this is about </h1>} />
+            <Route path='about' element={<About/>} />
             <Route path='reviews' element={<AllReviews />} />
             <Route path='reviews/:id' element={<ReviewDetails />} />
             <Route path='register' element={<Register />} />
