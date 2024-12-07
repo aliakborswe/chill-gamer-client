@@ -1,109 +1,86 @@
-
-
-import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { ReviewTable } from "@/components/ReviewTable";
-import { UpdateReviewModal } from "@/components/UpdateReviewModal";
-import { useToast } from "@/components/ui/use-toast";
+import { Pencil, Trash2 } from "lucide-react";
+import Wrapper from "../common/Wrapper";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/providers/AuthProviders";
+import { AuthInfo } from "@/utils/type";
 
 interface Review {
   _id: string;
+  GameId: string;
+  gameCoverUrl: string;
   gameTitle: string;
-  rating: number;
   genre: string;
-  publishingYear: number;
-  // Add other fields as needed
+  email: string;
 }
 
-const MyReviews=()=>{
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [selectedReview, setSelectedReview] = useState<Review | null>(null);
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
+const MyReviews = () => {
+  const { user } = useContext(AuthContext) as any as AuthInfo;
+  const [reviews, setReviews] = useState<Review[]>([]);
+  console.log(reviews)
 
-  const {
-    data: reviews,
-    isLoading,
-    error,
-  } = useQuery<Review[]>("myReviews", fetchMyReviews);
+  const email = user?.email;
 
-  const deleteMutation = useMutation(deleteReview, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("myReviews");
-      toast({
-        title: "Review deleted",
-        description: "Your review has been successfully deleted.",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: "Failed to delete the review. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  async function fetchMyReviews() {
-    const response = await fetch(
-      "http://localhost:8080/api/v1/reviews/my-reviews",
-      {
-        credentials: "include", // This is important for including cookies in the request
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch reviews");
+  useEffect(() =>{
+    const getReviewsByEmail = async ()=>{
+      const response = await fetch(
+        `http://localhost:8080/api/v1/reviews?email=${email}`
+      );
+      const data = await response.json()
+      setReviews(data);
     }
-    return response.json();
-  }
-
-  async function deleteReview(id: string) {
-    const response = await fetch(`http://localhost:8080/api/v1/reviews/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to delete review");
-    }
-    return response.json();
-  }
-
-  function handleUpdateClick(review: Review) {
-    setSelectedReview(review);
-    setIsUpdateModalOpen(true);
-  }
-
-  function handleDeleteClick(id: string) {
-    if (window.confirm("Are you sure you want to delete this review?")) {
-      deleteMutation.mutate(id);
-    }
-  }
-
-  if (isLoading) return <div className='text-center py-10'>Loading...</div>;
-  if (error)
-    return (
-      <div className='text-center py-10 text-red-500'>
-        Error fetching reviews
-      </div>
-    );
-
+    getReviewsByEmail();
+  },[email])
   return (
-    <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-8 text-center'>My Reviews</h1>
-      <ReviewTable
-        reviews={reviews || []}
-        onUpdateClick={handleUpdateClick}
-        onDeleteClick={handleDeleteClick}
-      />
-      {selectedReview && (
-        <UpdateReviewModal
-          isOpen={isUpdateModalOpen}
-          onClose={() => setIsUpdateModalOpen(false)}
-          review={selectedReview}
-        />
-      )}
-    </div>
+    <Wrapper>
+      <Table>
+        <TableCaption>A list of your recent watch List Games.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className='w-[100px]'>No</TableHead>
+            <TableHead>Avatar</TableHead>
+            <TableHead>Title</TableHead>
+            <TableHead>Genre</TableHead>
+            <TableHead className='text-right'>Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {reviews.map(({ _id, gameCoverUrl, gameTitle, genre }, index) => (
+            <TableRow key={_id}>
+              <TableCell className='font-medium'>{index + 1}</TableCell>
+              <TableCell>
+                <img
+                  src={gameCoverUrl}
+                  alt='avatar'
+                  className='w-10 aspect-square rounded-full'
+                />
+              </TableCell>
+              <TableCell>
+                <span className='text-xs md:text-sm'>{gameTitle}</span>
+              </TableCell>
+              <TableCell>{genre}</TableCell>
+              <TableCell className='text-right flex justify-end divide-x-2 divide-emerald-400'>
+                <span className='cursor-pointer text-primary pr-2'>
+                  <Pencil />
+                </span>
+                <span className='cursor-pointer text-red-500 pl-2'>
+                  <Trash2 />
+                </span>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Wrapper>
   );
-}
+};
 
 export default MyReviews;
