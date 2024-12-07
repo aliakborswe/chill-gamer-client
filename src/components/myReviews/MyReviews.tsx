@@ -14,7 +14,8 @@ import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-
+import { config } from "@/config";
+import Spinner from "../common/Spinner";
 
 interface Review {
   _id: string;
@@ -28,41 +29,52 @@ interface Review {
 const MyReviews = () => {
   const { user } = useContext(AuthContext) as any as AuthInfo;
   const [reviews, setReviews] = useState<Review[]>([]);
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const email = user?.email;
 
-  useEffect(() =>{
-    const getReviewsByEmail = async ()=>{
+  useEffect(() => {
+    const getReviewsByEmail = async () => {
+      try{
+        setLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/reviewByEmail?email=${email}`
+        `${config.API_BASE_URL}/reviewByEmail?email=${email}`
       );
-      const data = await response.json()
+      const data = await response.json();
       setReviews(data);
+      }catch(err: any){
+        toast.error(err.message);
+      }finally{
+        setLoading(false);
+      }
     }
     getReviewsByEmail();
-  },[email])
-  
-  // handle edit
-  const handleEdit = (id:string) => {
-    navigate(`/updateReview/${id}`);
-  }
+  }, [email]);
 
-// handle delete 
-  const handleDelete = async (id:string)=>{
-    try{
-      const response = await fetch(`http://localhost:8080/api/v1/reviews?id=${id}`,{
-        method: "DELETE"
+  // handle edit
+  const handleEdit = (id: string) => {
+    navigate(`/updateReview/${id}`);
+  };
+
+  // handle delete
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await fetch(`${config.API_BASE_URL}/reviews?id=${id}`, {
+        method: "DELETE",
       });
       if (!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse.message || "Failed to delete the item");
       }
       toast.success("Review deleted successfully");
-      setReviews(reviews.filter(review=>review._id!==id))
-    }catch(err:any){
-      toast.error(err.message)
+      setReviews(reviews.filter((review) => review._id !== id));
+    } catch (err: any) {
+      toast.error(err.message);
     }
+  };
+  if (loading) {
+    return <Spinner />;
   }
   return (
     <Wrapper>

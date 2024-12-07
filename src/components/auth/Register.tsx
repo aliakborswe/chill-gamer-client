@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Swal from "sweetalert2";
+import { config } from "@/config";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -45,9 +46,11 @@ const formSchema = z.object({
 });
 
 const Register = () => {
-  const {registerUser, updateUserProfile } = useContext(AuthContext) as any as AuthInfo;
-  const navigate = useNavigate()
- 
+  const { registerUser, updateUserProfile } = useContext(
+    AuthContext
+  ) as any as AuthInfo;
+  const navigate = useNavigate();
+
   // Define form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,50 +66,52 @@ const Register = () => {
     const email = values.email as string;
     const password = values.password as string;
     const updatedUser = { displayName: values.name, photoURL: values.photoURL };
-    if(registerUser){
-        registerUser(email, password)
-          .then((result) => {
-            fetch("http://localhost:8080/api/v1/user", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name: values.name,
-                email: result.user.email,
-                photoURL: values.photoURL,
-                password: values.password,
-              }),
-            }).then(()=>{
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "User created successfully",
-                  showConfirmButton: false,
-                  timer: 1000,
-                });
-                updateUserProfile(updatedUser);
-                form.reset();
-                navigate("/")
-            }).catch(err =>{
-                Swal.fire({
-                  position: "center",
-                  icon: "error",
-                  title: err.message,
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-            })
+    if (registerUser) {
+      registerUser(email, password)
+        .then((result) => {
+          fetch(`${config.API_BASE_URL}/user`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: values.name,
+              email: result.user.email,
+              photoURL: values.photoURL,
+              password: values.password,
+            }),
           })
-          .catch((err) => {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: err.message,
-              showConfirmButton: false,
-              timer: 1500,
+            .then(() => {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User created successfully",
+                showConfirmButton: false,
+                timer: 1000,
+              });
+              updateUserProfile(updatedUser);
+              form.reset();
+              navigate("/");
+            })
+            .catch((err) => {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: err.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
             });
+        })
+        .catch((err) => {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: err.message,
+            showConfirmButton: false,
+            timer: 1500,
           });
+        });
     }
   }
 
@@ -120,7 +125,7 @@ const Register = () => {
           className='md:w-1/2 aspect-square'
         />
         <div className='md:w-1/2'>
-        <SocialLogin/>
+          <SocialLogin />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -172,7 +177,11 @@ const Register = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter password' type="password" {...field} />
+                      <Input
+                        placeholder='Enter password'
+                        type='password'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

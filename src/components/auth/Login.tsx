@@ -3,6 +3,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { config } from "@/config";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -57,7 +58,7 @@ const Login = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     loginWithEmailPass(values.email, values.password)
       .then(() => {
-        fetch("http://localhost:8080/api/v1/user", {
+        fetch(`${config.API_BASE_URL}/user`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +80,6 @@ const Login = () => {
       .catch(() => {
         toast.error("Email or Password not Matched");
       });
-      
   }
 
   return (

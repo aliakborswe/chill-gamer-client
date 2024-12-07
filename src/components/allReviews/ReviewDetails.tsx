@@ -7,6 +7,7 @@ import Spinner from "../common/Spinner";
 import { Star } from "lucide-react";
 import { AuthContext } from "@/providers/AuthProviders";
 import { AuthInfo } from "@/utils/type";
+import { config } from "@/config";
 
 interface Review {
   _id: string;
@@ -22,8 +23,8 @@ interface Review {
   updatedAt: string;
 }
 
-const ReviewDetails =()=> {
- const {user} = useContext(AuthContext) as any as AuthInfo
+const ReviewDetails = () => {
+  const { user } = useContext(AuthContext) as any as AuthInfo;
   const { id } = useParams();
   const [review, setReview] = useState<Review | null>(null);
 
@@ -31,40 +32,36 @@ const ReviewDetails =()=> {
     if (id) {
       const fetchReview = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:8080/api/v1/reviews/${id}`
-          );
+          const response = await fetch(`${config.API_BASE_URL}/reviews/${id}`);
           const data = await response.json();
           setReview(data);
-        } catch (err:any) {
-          toast.error(err.message)
-        } 
+        } catch (err: any) {
+          toast.error(err.message);
+        }
       };
 
       fetchReview();
     }
   }, [id]);
 
-  const handleWatchList = async() =>{
-    try{
-      const response = await fetch("http://localhost:8080/api/v1/watchLists",{
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({...review, userEmail: user?.email}),
+  const handleWatchList = async () => {
+    try {
+      const response = await fetch(`${config.API_BASE_URL}/watchLists`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...review, userEmail: user?.email }),
       });
       if (!response.ok) {
         toast.error("This game already exist watch list");
         return;
       }
-      toast.success("Watch List add successfully")
-    }catch(err:any){
-      toast.error(err.message)
-
+      toast.success("Watch List add successfully");
+    } catch (err: any) {
+      toast.error(err.message);
     }
-  }
-
+  };
 
   if (!review) return <Spinner />;
 
@@ -123,6 +120,6 @@ const ReviewDetails =()=> {
       </div>
     </Wrapper>
   );
-}
+};
 
 export default ReviewDetails;

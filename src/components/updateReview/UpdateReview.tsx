@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Button } from "../ui/button";
+import { config } from "@/config";
 
 const UpdateReview = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,9 +53,7 @@ const UpdateReview = () => {
     if (id) {
       const fetchReview = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:8080/api/v1/reviews/${id}`
-          );
+          const response = await fetch(`${config.API_BASE_URL}/reviews/${id}`);
           const data = await response.json();
 
           // Dynamically update the form values
@@ -80,16 +79,13 @@ const UpdateReview = () => {
   async function onSubmit(data: ReviewFormValues) {
     setIsSubmitting(true);
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/reviews?id=${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`${config.API_BASE_URL}/reviews?id=${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       if (!response.ok) {
         toast.error("Failed to update review");

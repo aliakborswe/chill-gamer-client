@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "react-toastify";
+import { config } from "@/config";
 
 const AddReviews = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,7 +47,7 @@ const AddReviews = () => {
   async function onSubmit(data: ReviewFormValues) {
     setIsSubmitting(true);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/reviews", {
+      const response = await fetch(`${config.API_BASE_URL}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +61,7 @@ const AddReviews = () => {
 
       toast.success("Review submitted successfully");
       form.reset();
-    } catch (err:any) {
+    } catch (err: any) {
       toast.error(err.message || "Error submitting review");
     } finally {
       setIsSubmitting(false);
