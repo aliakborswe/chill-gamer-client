@@ -1,3 +1,4 @@
+import CheckLatestNews from "./CheckLatestNews";
 import FAQ from "./FAQ";
 import FeaturedGameSeciton from "./FeaturedGameSeciton";
 import GameDevSection from "./GameDevSection";
@@ -11,14 +12,14 @@ const Home = () => {
     
      
   return (
-    <div>
+    <>
       <Slider/>
       <FeaturedGameSeciton/>
       <HighestRateGame/>
-
+      <CheckLatestNews/>
       <GameDevSection/>
       <FAQ/>
-    </div>
+    </>
   );
 };
 
