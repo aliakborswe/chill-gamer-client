@@ -1,5 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import  { useState } from "react";
+import Wrapper from "../common/Wrapper";
 
 const faqData = [
   {
@@ -36,9 +37,8 @@ const FAQ = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
   return (
-    <section className='bg-white py-12'>
-      <div className='container px-2.5 mx-auto'>
-        <h2 className='text-3xl font-extrabold text-gray-900 text-center mb-8'>
+      <Wrapper>
+        <h2 className='text-3xl font-extrabold  text-center mb-8'>
           Frequently Asked Questions
         </h2>
         <div className='space-y-6'>
@@ -51,8 +51,7 @@ const FAQ = () => {
             />
           ))}
         </div>
-      </div>
-    </section>
+      </Wrapper>
   );
 };
 
@@ -65,16 +64,16 @@ const FAQItem = ({ item, isOpen, toggleOpen }:any) => {
         className='flex justify-between items-center w-full text-left'
         onClick={toggleOpen}
       >
-        <span className='text-lg font-medium text-gray-900'>
+        <span className='text-lg font-medium '>
           {item.question}
         </span>
         {isOpen ? (
-          <ChevronUpIcon className='h-6 w-6 text-gray-500' />
+          <ChevronUpIcon className='h-6 w-6 text-gray-700' />
         ) : (
-          <ChevronDownIcon className='h-6 w-6 text-gray-500' />
+          <ChevronDownIcon className='h-6 w-6 text-gray-400' />
         )}
       </button>
-      {isOpen && <p className='mt-2 text-gray-600'>{item.answer}</p>}
+      {isOpen && <p className='mt-2 text-gray-400'>{item.answer}</p>}
     </div>
   );
 };

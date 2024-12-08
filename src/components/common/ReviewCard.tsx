@@ -16,7 +16,7 @@ interface ReviewCardProps {
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
   return (
-    <Card className='w-full h-full flex flex-col'>
+    <Card className='w-full h-full flex flex-col bg-white text-black'>
       <CardContent className='p-4 flex-grow'>
         <div className='aspect-w-16 aspect-h-9 mb-4'>
           <img

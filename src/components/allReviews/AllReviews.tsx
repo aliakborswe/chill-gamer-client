@@ -33,6 +33,8 @@ const AllReviews = () => {
     fetchReviews();
   }, []);
 
+  
+
   const sortedReviews: Review[] = [...reviews].sort((a, b) => {
     if (sortOption === "rating") {
       return b.rating - a.rating;

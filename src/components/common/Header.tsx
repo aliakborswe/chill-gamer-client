@@ -8,15 +8,19 @@ import {
   LogIn,
   LogOut,
   Menu,
+  Moon,
+  Sun,
   UserRoundPlus,
   X,
 } from "lucide-react";
 import logo from "@/assets/logo.svg";
 import { Button } from "../ui/button";
 import { Tooltip } from "react-tooltip";
+import { useTheme } from "@/providers/ThemeProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext) as any as AuthInfo;
+  const {theme, setTheme} = useTheme()
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   const navigate = useNavigate();
@@ -31,7 +35,7 @@ const Header = () => {
     }
   };
   return (
-    <header className='bg-white'>
+    <header className=''>
       <div className='container mx-auto px-2.5 py-5'>
         <nav className='flex flex-row gap-6 justify-between items-center'>
           <div className='flex items-center'>
@@ -51,7 +55,7 @@ const Header = () => {
               showMenu ? "block bg-white" : "hidden"
             } lg:block absolute z-10 lg:static top-20 left-0 p-4 rounded-xl pr-16 lg:pr-0`}
           >
-            <div className='flex flex-col lg:flex-row  gap-4 md:items-center text-base font-medium text-black w-full'>
+            <div className='flex flex-col lg:flex-row  gap-4 md:items-center text-base font-medium text-foreground w-full'>
               <ActiveLink to='/'>Home</ActiveLink>
               <ActiveLink to='/reviews'>Reviews</ActiveLink>
               <ActiveLink to='/addReview'>Add-Review</ActiveLink>
@@ -62,9 +66,23 @@ const Header = () => {
           </div>
 
           <div className='flex items-center gap-2 text-base font-semibold [&_a]:flex [&_a]:gap-1 '>
+            <div>
+              <button
+                onClick={() =>
+                  theme === "light" ? setTheme("dark") : setTheme("light")
+                }
+                className='flex justify-center items-center'
+              >
+                {theme === "light" ? (
+                  <Sun />
+                ) : (
+                  <Moon />
+                )}
+              </button>
+            </div>
             {user !== null ? (
               <>
-                <div className="z-10">
+                <div className='z-10'>
                   <img
                     src={
                       user?.photoURL ||
@@ -89,15 +107,16 @@ const Header = () => {
             ) : (
               <>
                 <Link to='/login'>
-                  <Button>
+                  <Button
+                  >
                     <LogIn />
                     Login
                   </Button>
                 </Link>
                 <Link to='/register'>
                   <Button
-                    className='flex items-center gap-1 bg-secondary/90 text-white'
-                    variant={"secondary"}
+                    className='flex items-center gap-1'
+                    variant={"destructive"}
                   >
                     <UserRoundPlus />
                     Signup

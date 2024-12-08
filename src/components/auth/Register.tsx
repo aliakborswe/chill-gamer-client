@@ -129,7 +129,7 @@ const Register = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className='space-y-8 border-t-2 border-accent pt-6'
+              className='space-y-8 border-t-2 border-primary pt-6'
             >
               <FormField
                 control={form.control}
@@ -138,7 +138,7 @@ const Register = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter Your Name' {...field} />
+                      <Input placeholder='Enter Your Name' {...field} className='border-foreground' />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -151,7 +151,7 @@ const Register = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter Your email' {...field} />
+                      <Input placeholder='Enter Your email' {...field} className='border-foreground' />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -164,7 +164,7 @@ const Register = () => {
                   <FormItem>
                     <FormLabel>Photo URL</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter Your Photo url' {...field} />
+                      <Input placeholder='Enter Your Photo url' {...field} className='border-foreground' />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -180,7 +180,7 @@ const Register = () => {
                       <Input
                         placeholder='Enter password'
                         type='password'
-                        {...field}
+                        {...field} className='border-foreground'
                       />
                     </FormControl>
                     <FormMessage />

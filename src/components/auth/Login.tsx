@@ -96,7 +96,7 @@ const Login = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className='space-y-8 border-t-2 border-accent pt-6'
+              className='space-y-8 border-t-2 border-primary pt-6'
             >
               <FormField
                 control={form.control}
@@ -105,7 +105,7 @@ const Login = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter Your email' {...field} />
+                      <Input placeholder='Enter Your email' {...field} className='border-foreground' />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -121,7 +121,7 @@ const Login = () => {
                       <Input
                         placeholder='Enter password'
                         type='password'
-                        {...field}
+                        {...field} className='border-foreground'
                       />
                     </FormControl>
                     <FormMessage />

@@ -81,7 +81,7 @@ const MyReviews = () => {
       <Table>
         <TableCaption>A list of your recent watch List Games.</TableCaption>
         <TableHeader>
-          <TableRow>
+          <TableRow className='border-b border-muted-foreground'>
             <TableHead className='w-[100px]'>No</TableHead>
             <TableHead>Avatar</TableHead>
             <TableHead>Title</TableHead>
@@ -91,7 +91,7 @@ const MyReviews = () => {
         </TableHeader>
         <TableBody>
           {reviews.map(({ _id, gameCoverUrl, gameTitle, genre }, index) => (
-            <TableRow key={_id}>
+            <TableRow key={_id} className='border-b border-muted-foreground'>
               <TableCell className='font-medium'>{index + 1}</TableCell>
               <TableCell>
                 <img

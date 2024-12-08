@@ -84,7 +84,7 @@ const AddReviews = () => {
                 <Input
                   placeholder='https://example.com/game-cover.jpg'
                   {...field}
-                  className='border-black'
+                  className='border-foreground'
                 />
               </FormControl>
               <FormDescription>
@@ -104,7 +104,7 @@ const AddReviews = () => {
                 <Input
                   placeholder='Enter game title'
                   {...field}
-                  className='border-black'
+                  className='border-foreground'
                 />
               </FormControl>
               <FormMessage />
@@ -121,7 +121,7 @@ const AddReviews = () => {
                 <Textarea
                   placeholder='Write your review here (minimum 10 characters)'
                   {...field}
-                  className='border-black'
+                  className='border-foreground'
                 />
               </FormControl>
               <FormMessage />
@@ -141,7 +141,7 @@ const AddReviews = () => {
                   max={10}
                   placeholder='Rate from 1 to 10'
                   {...field}
-                  className='border-black'
+                  className='border-foreground'
                   onChange={(e) => field.onChange(Number(e.target.value))}
                 />
               </FormControl>
@@ -163,7 +163,7 @@ const AddReviews = () => {
                   max={new Date().getFullYear()}
                   placeholder='Enter publishing year'
                   {...field}
-                  className='border-black'
+                  className='border-foreground'
                   onChange={(e) => field.onChange(Number(e.target.value))}
                 />
               </FormControl>
@@ -179,7 +179,7 @@ const AddReviews = () => {
               <FormLabel>Genre</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className='border-black'>
+                  <SelectTrigger className='border-foreground'>
                     <SelectValue placeholder='Select a genre' />
                   </SelectTrigger>
                 </FormControl>
@@ -209,7 +209,7 @@ const AddReviews = () => {
             <FormItem>
               <FormLabel>User Email</FormLabel>
               <FormControl>
-                <Input {...field} className='border-black' disabled />
+                <Input {...field} className='border-foreground' disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -222,7 +222,7 @@ const AddReviews = () => {
             <FormItem>
               <FormLabel>User Name</FormLabel>
               <FormControl>
-                <Input {...field} className='border-black' disabled />
+                <Input {...field} className='border-foreground' disabled />
               </FormControl>
               <FormMessage />
             </FormItem>

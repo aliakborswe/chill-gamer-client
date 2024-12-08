@@ -5,7 +5,7 @@ import devImg from "@/assets/demo2-about-img.jpg";
 
 const GameDevSection =() =>{
   return (
-    <section className='bg-primary/10 min-h-screen'>
+    <section className=''>
       <div className='container mx-auto px-4 py-16 lg:py-24'>
         <div className='grid lg:grid-cols-2 gap-8 lg:gap-12 items-center'>
           {/* Left Column - Image */}
@@ -23,14 +23,14 @@ const GameDevSection =() =>{
           <div className='space-y-6 lg:space-y-8'>
             {/* Label */}
             <div className='flex items-center gap-2'>
-              <div className='w-4 h-4 bg-cyan-500' />
-              <span className='text-cyan-500 font-medium tracking-wider text-sm'>
+              <div className='w-4 h-4 bg-primary' />
+              <span className='text-primary font-medium tracking-wider text-sm'>
                 WHO WE ARE
               </span>
             </div>
 
             {/* Heading */}
-            <h2 className='text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight'>
+            <h2 className='text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight'>
               AN AWARD WINNING
               <br />
               GAME DEVELOPMENT
@@ -47,21 +47,21 @@ const GameDevSection =() =>{
             {/* Numbered List */}
             <div className='space-y-4 py-4'>
               <div className='flex items-start gap-4'>
-                <span className='text-cyan-500 text-xl font-bold'>01</span>
-                <p className='text-black text-lg font-medium'>
+                <span className='text-primary text-xl font-bold'>01</span>
+                <p className=' text-lg font-medium'>
                   Be Greeted With Cuteness Every Time You Game
                 </p>
               </div>
               <div className='flex items-start gap-4'>
-                <span className='text-cyan-500 text-xl font-bold'>02</span>
-                <p className='text-black text-lg font-medium'>
+                <span className='text-primary text-xl font-bold'>02</span>
+                <p className=' text-lg font-medium'>
                   Embark On A Journey Of Cuteness And Games
                 </p>
               </div>
             </div>
 
             {/* Button */}
-            <Button className='group bg-transparent border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-white transition-all duration-300 rounded-none px-8 py-6 text-lg'>
+            <Button className='group bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 rounded-none px-8 py-6 text-lg'>
               KNOW MORE
               <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
             </Button>

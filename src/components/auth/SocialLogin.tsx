@@ -15,8 +15,7 @@ const SocialLogin = () => {
 
   const handlePopup = () => {
     loginWithGoogle()
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         toast.success("Success to login");
         navigate(from, { replace: true });
       })

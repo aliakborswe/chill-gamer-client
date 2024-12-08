@@ -24,7 +24,7 @@ const FeaturedGameSection = () => {
       >
         <CarouselContent>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='bg-gray-800 text-white'>
+            <Card className='bg-primary text-white'>
               <img
                 src={img1}
                 alt='image'
@@ -37,7 +37,7 @@ const FeaturedGameSection = () => {
             </Card>
           </CarouselItem>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='bg-gray-800 text-white'>
+            <Card className='bg-primary text-white'>
               <img
                 src={img2}
                 alt='image'
@@ -50,7 +50,7 @@ const FeaturedGameSection = () => {
             </Card>
           </CarouselItem>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='bg-gray-800 text-white'>
+            <Card className='bg-primary text-white'>
               <img
                 src={img3}
                 alt='image'
@@ -63,7 +63,7 @@ const FeaturedGameSection = () => {
             </Card>
           </CarouselItem>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='bg-gray-800 text-white'>
+            <Card className='bg-primary text-white'>
               <img
                 src={img4}
                 alt='image'

@@ -17,7 +17,7 @@ const Footer = () => {
       <div className='container mx-auto px-4 pt-12'>
         <div className='text-center mb-8'>
           <h2 className='text-2xl font-bold'>Chill Gamer</h2>
-          <p className='text-gray-600 mt-2'>A Game Review Application.</p>
+          <p className='text-gray-400 mt-2'>A Game Review Application.</p>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto'>
           {Object.entries(footerLinks).map(([title, links]) => (
@@ -28,7 +28,7 @@ const Footer = () => {
                   <li key={link}>
                     <Link
                       to='/'
-                      className='text-gray-600 hover:text-primary transition-colors'
+                      className='text-gray-400 hover:text-primary transition-colors'
                     >
                       {link}
                     </Link>

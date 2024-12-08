@@ -83,7 +83,7 @@ const GameWatchList = () => {
       <Table>
         <TableCaption>A list of your recent watch List Games.</TableCaption>
         <TableHeader>
-          <TableRow>
+          <TableRow className='border-b border-muted-foreground'>
             <TableHead className='w-[100px]'>No</TableHead>
             <TableHead>Avatar</TableHead>
             <TableHead>Title</TableHead>
@@ -92,8 +92,11 @@ const GameWatchList = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {watchList.map(({ gameId,_id }, index) => (
-            <TableRow key={gameId?._id}>
+          {watchList.map(({ gameId, _id }, index) => (
+            <TableRow
+              key={gameId?._id}
+              className='border-b border-muted-foreground'
+            >
               <TableCell className='font-medium'>{index + 1}</TableCell>
               <TableCell>
                 <img
