@@ -53,10 +53,10 @@ const Header = () => {
           >
             <div className='flex flex-col lg:flex-row  gap-4 md:items-center text-base font-medium text-black w-full'>
               <ActiveLink to='/'>Home</ActiveLink>
-              <ActiveLink to='/reviews'>All-Reviews</ActiveLink>
+              <ActiveLink to='/reviews'>Reviews</ActiveLink>
               <ActiveLink to='/addReview'>Add-Review</ActiveLink>
               <ActiveLink to='/myReviews'>My-Reviews</ActiveLink>
-              <ActiveLink to='/myWatchlist'>Game-WatchList</ActiveLink>
+              <ActiveLink to='/myWatchlist'>WatchList</ActiveLink>
               <ActiveLink to='/about'>About</ActiveLink>
             </div>
           </div>
