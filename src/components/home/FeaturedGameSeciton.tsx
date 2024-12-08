@@ -1,12 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"; // Ensure this is properly imported
 import Wrapper from "../common/Wrapper";
-import img1 from "@/assets/portfolio-01-840x540.jpg"
-import img2 from "@/assets/portfolio-02-840x540.jpg"
-import img3 from "@/assets/portfolio-03-840x540.jpg"
-import img4 from "@/assets/portfolio-04-840x540.jpg"
+import img1 from "@/assets/portfolio-01-840x540.jpg";
+import img2 from "@/assets/portfolio-02-840x540.jpg";
+import img3 from "@/assets/portfolio-03-840x540.jpg";
+import img4 from "@/assets/portfolio-04-840x540.jpg";
 import Autoplay from "embla-carousel-autoplay";
-
 
 const FeaturedGameSection = () => {
   return (
@@ -25,7 +24,7 @@ const FeaturedGameSection = () => {
       >
         <CarouselContent>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='max-w-xs bg-gray-800 text-white'>
+            <Card className='bg-gray-800 text-white'>
               <img
                 src={img1}
                 alt='image'
@@ -38,7 +37,7 @@ const FeaturedGameSection = () => {
             </Card>
           </CarouselItem>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='max-w-xs bg-gray-800 text-white'>
+            <Card className='bg-gray-800 text-white'>
               <img
                 src={img2}
                 alt='image'
@@ -51,7 +50,7 @@ const FeaturedGameSection = () => {
             </Card>
           </CarouselItem>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='max-w-xs bg-gray-800 text-white'>
+            <Card className='bg-gray-800 text-white'>
               <img
                 src={img3}
                 alt='image'
@@ -64,7 +63,7 @@ const FeaturedGameSection = () => {
             </Card>
           </CarouselItem>
           <CarouselItem className='md:basis-1/2 lg:basis-1/3'>
-            <Card className='max-w-xs bg-gray-800 text-white'>
+            <Card className='bg-gray-800 text-white'>
               <img
                 src={img4}
                 alt='image'
