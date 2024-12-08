@@ -31,7 +31,7 @@ const HighestRateGame = () => {
 
     const highestRatingReview = reviews
       .filter((review) => review.rating >= 8)
-      .slice(0, 6);
+      .slice(0, 8);
     return (
       <Wrapper>
         <h1 className='text-3xl font-bold mb-8 text-center'>Highest Rate Games</h1>
