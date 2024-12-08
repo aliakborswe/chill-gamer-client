@@ -30,7 +30,7 @@ const HighestRateGame = () => {
     if (loading) return <Spinner />;
 
     const highestRatingReview = reviews
-      .filter((review) => review.rating >= 6)
+      .filter((review) => review.rating >= 8)
       .slice(0, 6);
     return (
       <Wrapper>
